@@ -32,52 +32,7 @@ public class Player : MonoBehaviour
         
 
 
-        StreamWriter writer = new StreamWriter(FILE_NAME, false); //open the file
-        
-        writer.Write("playerName" + DELIMITER + myManager.playerScore + DELIMITER + "\n"); //write the player's name and score, which will look like: karina popp | 1000
-
-        writer.Close(); //close the file
-
-        StreamReader reader = new StreamReader(FILE_NAME); //open the file
-        content = reader.ReadToEnd(); //read the file
-
-        char[] delimiterChars = { '|' }; //add delimiters
-        //the split funciton asks for an array of chars, even through right now we only need one
-        string[] scoreSplit = content.Split(delimiterChars); //split the line based on our delimiter
-
-        List<int> allScores = new List<int>();
-        for (int i = 0; i < scoreSplit.Length; i++)
-        {
-            //Debug.Log(scoreSplit[i]);
-            if (i % 2 != 0)
-            {
-                allScores.Add(int.Parse(scoreSplit[i]));
-            }
-        }
-
-        allScores.Sort();
-
-        int highestScore = allScores[allScores.Count - 1];
-
-        Debug.Log("the highest score is " + highestScore);
-
-        for (int i = allScores.Count - 1; i >= 0; i--)
-        {
-            //this for loop goes through the sorted list of scores
-            //from top to bottom
-            //we can use the scores to make a high score board
-        }
-
-        int highScore = int.Parse(scoreSplit[1]); //turn the score (which is a string) into an int
-        int allHighScores = 100 + highScore; //b/c it's now an int, we can use it as a number
-
-        //Debug.Log(allHighScores);
-
-        //Debug.Log("name: " + scoreSplit[0]);
-        //Debug.Log("score: " + scoreSplit[1]);
-
-        //Debug.Log(content);
-        reader.Close(); //close the file
+       
 
 
     }
@@ -111,11 +66,60 @@ public class Player : MonoBehaviour
             transform.localEulerAngles = new Vector3(0, 0, -90);
 
         }
-        transform.position = newPos;//transform position value to the newPos value
+        transform.position = newPos;
 
         if (health <= 0)
         {
             Debug.Log("You're dead");
+
+
+            StreamWriter writer = new StreamWriter(FILE_NAME, false); 
+
+            writer.Write("playerName" + DELIMITER + myManager.playerScore + DELIMITER + "\n"); 
+
+            writer.Close(); 
+
+            StreamReader reader = new StreamReader(FILE_NAME); 
+            content = reader.ReadToEnd(); 
+
+            char[] delimiterChars = { '|' }; 
+                                             
+            string[] scoreSplit = content.Split(delimiterChars); 
+
+            List<int> allScores = new List<int>();
+            for (int i = 0; i < scoreSplit.Length; i++)
+            {
+                Debug.Log(scoreSplit[i]);
+                if (i % 2 != 0)
+                {
+                    allScores.Add(int.Parse(scoreSplit[i]));
+                }
+            }
+
+            allScores.Sort();
+
+            int highestScore = allScores[allScores.Count - 1];
+
+            Debug.Log("the highest score is " + highestScore);
+
+            for (int i = allScores.Count - 1; i >= 0; i--)
+            {
+                Debug.Log("allScores");
+     
+            }
+
+            int highScore = int.Parse(scoreSplit[1]); 
+            int allHighScores = 100 + highScore; 
+
+            Debug.Log(allHighScores);
+
+            Debug.Log("name: " + scoreSplit[0]);
+            Debug.Log("score: " + scoreSplit[1]);
+
+            Debug.Log(content);
+            reader.Close(); 
+
+
 
             SceneManager.LoadScene("Menu"); //load the new scene
 
