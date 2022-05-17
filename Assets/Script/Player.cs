@@ -19,9 +19,7 @@ public class Player : MonoBehaviour
 
     string content;
 
-    //the name of our file
-    //we're making it a const because it's a variable that really never needs to change
-    //you must include the file ending
+
     const string FILE_NAME = "Save.txt";
 
 
