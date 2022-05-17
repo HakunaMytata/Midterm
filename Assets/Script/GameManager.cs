@@ -12,10 +12,12 @@ public class GameManager : MonoBehaviour
 
     //set player scores
     public int playerScore;
-    
+
+    public int time;
 
     public Text playerText;
 
+ 
 
 
 
