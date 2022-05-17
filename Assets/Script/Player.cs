@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public GameManager myManager;
     const char DELIMITER = '|';
 
-
+    float timeCount = 0;
     string content;
 
 
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         
 
 
-       
+
 
 
     }
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        timeCount += 100 * Time.deltaTime;
 
         Vector3 newPos = transform.position;
         if (Input.GetKey(KeyCode.W))//WASD CONTROLLER
@@ -70,53 +70,16 @@ public class Player : MonoBehaviour
         {
             Debug.Log("You're dead");
 
+            Debug.Log(timeCount);
 
-            StreamWriter writer = new StreamWriter(FILE_NAME, false); 
 
-            writer.Write("playerName" + DELIMITER + myManager.playerScore + DELIMITER + "\n"); 
 
-            writer.Close(); 
+            StreamWriter writer = new StreamWriter(FILE_NAME, true);
 
-            StreamReader reader = new StreamReader(FILE_NAME); 
-            content = reader.ReadToEnd(); 
+            writer.Write("Score:" + DELIMITER + timeCount + DELIMITER + "\n");
 
-            char[] delimiterChars = { '|' }; 
-                                             
-            string[] scoreSplit = content.Split(delimiterChars); 
 
-            List<int> allScores = new List<int>();
-            for (int i = 0; i < scoreSplit.Length; i++)
-            {
-                Debug.Log(scoreSplit[i]);
-                if (i % 2 != 0)
-                {
-                    allScores.Add(int.Parse(scoreSplit[i]));
-                }
-            }
-
-            allScores.Sort();
-
-            int highestScore = allScores[allScores.Count - 1];
-
-            Debug.Log("the highest score is " + highestScore);
-
-            for (int i = allScores.Count - 1; i >= 0; i--)
-            {
-                Debug.Log("allScores");
-     
-            }
-
-            int highScore = int.Parse(scoreSplit[1]); 
-            int allHighScores = 100 + highScore; 
-
-            Debug.Log(allHighScores);
-
-            Debug.Log("name: " + scoreSplit[0]);
-            Debug.Log("score: " + scoreSplit[1]);
-
-            Debug.Log(content);
-            reader.Close(); 
-
+            writer.Close();
 
 
             SceneManager.LoadScene("Menu"); //load the new scene

@@ -1,1 +1,3 @@
-playerName|0|
+Score:|328.2786|
+Score:|284.2414|
+Score:|244.0319|
