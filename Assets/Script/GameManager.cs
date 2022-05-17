@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,11 @@ public class GameManager : MonoBehaviour
     public static float score;//public variable that is static  and is accesible to all scripts
     public const float bulletSpeed = 1100;//variable that cannot be changed
 
+    //set player scores
+    public int playerScore;
+    
+
+    public Text playerText;
 
 
 
@@ -50,6 +56,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape)) //when we press keyboard Escape
         {
             SceneManager.LoadScene("Menu"); //load the new scene
+            playerText.text = "Score:" + playerScore; //display text
         }
     }
 }
