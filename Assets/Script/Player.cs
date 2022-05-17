@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     const char DELIMITER = '|';
 
     float timeCount = 0;
+    int intTime = 0;
+
     string content;
 
 
@@ -77,6 +79,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         timeCount += 100 * Time.deltaTime;
+        intTime = Mathf.RoundToInt(timeCount);
 
         Vector3 newPos = transform.position;
         if (Input.GetKey(KeyCode.W))//WASD CONTROLLER
@@ -114,7 +117,7 @@ public class Player : MonoBehaviour
 
             StreamWriter writer = new StreamWriter(FILE_NAME, true);
 
-            writer.Write("Score:" + DELIMITER + timeCount + DELIMITER + "\n");
+            writer.Write("Score:" + DELIMITER + intTime + DELIMITER + "\n");
 
 
             writer.Close();
